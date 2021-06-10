@@ -1,0 +1,61 @@
+package com.kh.library.controller;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import com.kh.library.model.vo.Book;
+
+public class BookManager {
+	HashMap<Integer, Book> bookMap = new HashMap<>();
+	
+	public void insertBook(Book book) {
+		int lastNo = 0;
+		Set<Integer> keyset = bookMap.keySet();
+		Iterator<Integer> it = keyset.iterator();
+		while(it.hasNext()) {
+			lastNo = it.next();
+		 	}
+		bookMap.put(lastNo + 1, book);
+	}
+	
+	
+	public int deleteBook(int bNo) {
+		int result = 0;
+		Set<Integer> keySet = bookMap.keySet();
+		Iterator<Integer> it = keySet.iterator();
+		for(int key : keySet) {
+			if(bNo == key) {
+				bookMap.remove(bNo);
+				result = 1;
+			}
+		}
+		return result;
+	}
+	
+	public HashMap<Integer, Book> searchBook(String title){
+		HashMap<Integer, Book> searchMap = new HashMap<Integer, Book>();
+		
+		Set<Entry<Integer, Book>> entryset = bookMap.entrySet();
+		Iterator<Entry<Integer, Book>> it = entryset.iterator();
+		while(it.hasNext()) {
+			Entry<Integer, Book> entry = it.next();
+			if(entry.getValue().getTitle().equals(title)) {
+				searchMap.put(entry.getKey(), entry.getValue());
+			}
+		}
+		return searchMap;	
+	}
+	
+	public HashMap<Integer, Book> selectMap(){
+		return bookMap;
+	}
+	
+	
+}
+
+
+
+
+
