@@ -1,0 +1,47 @@
+package com.kh.part02_scheduling.run;
+
+import com.kh.part02_scheduling.thread.Car;
+import com.kh.part02_scheduling.thread.Plane;
+import com.kh.part02_scheduling.thread.Tank;
+
+public class Run {
+
+	public static void main(String[] args) {
+		Thread t1 = new Thread(new Car());		
+		Thread t2 = new Thread(new Plane());
+		Thread t3 = new Thread(new Tank());
+		
+		System.out.println("Car의 우선 순위 : " + t1.getPriority());
+		System.out.println("Plane의 우선 순위 : " + t2.getPriority());
+		System.out.println("Tank의 우선 순위 : " + t3.getPriority());		
+		
+		t1.setPriority(1);
+		t1.setPriority(Thread.MIN_PRIORITY);
+		
+		t3.setPriority(10);
+		t3.setPriority(Thread.MAX_PRIORITY);
+		
+		System.out.println("Car의 우선 순위 : " + t1.getPriority());
+		System.out.println("Plane의 우선 순위 : " + t2.getPriority());
+		System.out.println("Tank의 우선 순위 : " + t3.getPriority());
+
+		// t1.setDaemon(true);
+		
+		t1.start();
+		t2.start();
+		t3.start();
+		
+		try {
+			// Wait for this thread to die : 이 스레드가 종료될 때까지 기다린다.
+			t1.join();
+			t2.join();
+			t3.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("===== main end =====");
+	}
+}
+
+
