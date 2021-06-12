@@ -1,0 +1,38 @@
+package com.kh.chap01_inet.example;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+public class InetSample {
+
+	public void ipSample() {
+
+		try {
+			InetAddress localIP = InetAddress.getLocalHost();
+			System.out.println(localIP);
+			
+			// String getHostName() : 호스트의 이름 반환
+			System.out.println("내 PC명 : " + localIP.getHostName());
+			// String getHostAddress() : 호스트의 IP 주소 반환
+			System.out.println("내 IP : " + localIP.getHostAddress());
+			
+			System.out.println("============================");
+			
+			
+			InetAddress googleIP = InetAddress.getByName("www.google.com");
+			System.out.println("구글 서버명 : " + googleIP.getHostName());
+			System.out.println("구글 IP : " + googleIP.getHostAddress());
+			
+			InetAddress[] naverIPs = InetAddress.getAllByName("www.naver.com");
+			System.out.println(naverIPs.length);
+			for(InetAddress ip : naverIPs) {
+				System.out.println(ip.getHostAddress());
+			}
+			
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+}
