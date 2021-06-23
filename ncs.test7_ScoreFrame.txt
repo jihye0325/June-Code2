@@ -1,0 +1,105 @@
+package ncs.test7;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class ScoreFrame extends JFrame{
+	private JTextField javaScore, sqlScore;
+	private JTextField total, average;
+	private JButton calcBtn;
+	
+	public ScoreFrame() {
+		
+		this.setTitle("                         문제 7");
+		this.setSize(400, 370);
+		this.setLayout(new FlowLayout());
+		// 점수를 입력하세요
+		JLabel title = new JLabel("점수를 입력하세요");
+		title.setFont(new Font(null, Font.BOLD, 40));
+		title.setHorizontalAlignment(JLabel.CENTER);
+		
+		// 자바, SQL 점수입력
+		JLabel java = new JLabel("자바:");
+		java.setFont(new Font(null, Font.BOLD, 13));
+		javaScore = new JTextField(10);
+		
+		JLabel nulllabel = new JLabel("     ");
+		nulllabel.setSize(10, 5);
+		
+		JLabel sql = new JLabel("SQL:");
+		sql.setFont(new Font(null, Font.BOLD, 13));
+		sqlScore = new JTextField(10);
+		
+		// 계산하기 버튼
+		JPanel panel = new JPanel(null);
+		panel.setPreferredSize(new Dimension(350, 150));
+		calcBtn	= new JButton("계산하기");
+		calcBtn.setBounds(130, 50, 100, 30);
+		calcBtn.setFont(new Font(null, Font.BOLD, 13));
+		panel.add(calcBtn);
+		
+		// 버튼 클릭 이벤트
+		calcBtn.addActionListener(new ScoreFrame$ActionHandler());
+		
+		// 총점, 평균 출력
+		JLabel to = new JLabel("총점:");
+		to.setFont(new Font(null, Font.BOLD, 13));
+		total = new JTextField(10);
+			
+		JLabel nulllabel2 = new JLabel("     ");
+		nulllabel2.setSize(10, 5);
+		
+		JLabel av = new JLabel("평균:");
+		av.setFont(new Font(null, Font.BOLD, 13));
+		average = new JTextField(10);		
+		
+		// 프레임에 올리기
+		this.add(title);
+		this.add(java);
+		this.add(javaScore);
+		this.add(nulllabel);
+		this.add(sql);
+		this.add(sqlScore);
+		this.add(panel);
+		this.add(to);
+		this.add(total);
+		this.add(nulllabel2);
+		this.add(av);
+		this.add(average);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);
+	}
+	
+	private class ScoreFrame$ActionHandler implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			int jScore = Integer.parseInt(javaScore.getText());
+			int sScore = Integer.parseInt(sqlScore.getText());
+			
+			int sum = jScore + sScore;
+			int avg = sum / 2;
+			
+			total.setText(sum + "");
+			average.setText(avg + "");
+		
+		}
+		
+	}
+}
+
+
+
+
+
